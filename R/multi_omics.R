@@ -237,7 +237,8 @@ PlotMultiPCA <- function(imgNm, dpi=72, format="png",factor="1", interactive=F){
   combined_data <- do.call(rbind, all_data)
   
   p1 <- ggplot(combined_data, aes(x=PC1, y=PC2, color=Conditions)) +
-    geom_point(size=3, alpha=0.5) + 
+    geom_point(size=3, alpha=0.5) +
+    geom_text(aes(label=names), vjust=1.5, hjust=1.5, size=3) +  # Add labels
     facet_wrap(~ dataset, scales = "free") + # Use facet_wrap or facet_grid
     theme_bw() +
     theme(text=element_text(size=13))
@@ -402,7 +403,8 @@ PlotMultiTsne <- function(imgNm, dpi=72, format="png",factor="1"){
     xlim <- GetExtendRange(pca.res[,1]);
     ylim <- GetExtendRange(pca.res[,2]);
     
-    Factor <- dataSet$meta[,1];
+    factor <- as.numeric(factor)
+    Factor <- dataSet$meta[,factor];
     pca.rest <- pca.res
     pca.rest$Conditions <- Factor
     pca.rest$names <- rownames(pca.res)
