@@ -238,7 +238,7 @@ PlotMultiPCA <- function(imgNm, dpi=72, format="png",factor="1", interactive=F){
   
   p1 <- ggplot(combined_data, aes(x=PC1, y=PC2, color=Conditions)) +
     geom_point(size=3, alpha=0.5) +
-    geom_text(aes(label=names), vjust=1.5, hjust=1.5, size=3) +  # Add labels
+    geom_text(aes(label=names),size=1) +  # Add labels
     facet_wrap(~ dataset, scales = "free") + # Use facet_wrap or facet_grid
     theme_bw() +
     theme(text=element_text(size=13))
