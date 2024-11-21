@@ -169,8 +169,13 @@ PlotMultiPCA <- function(imgNm, dpi=72, format="png",factor="1", interactive=F){
   for(i in 1:length(sel.nms)){
     dataSet = readDataset(sel.nms[i])
     x <- dataSet$data.proc
-    print(head(x));
-    pca <- prcomp(t(na.omit(x)), center=T, scale=T);
+    x_t <- t(na.omit(x))
+    # Identify columns with zero variance
+    zero_var_cols <- apply(x_t, 2, function(col) var(col) == 0)
+    # Remove columns with zero variance
+    x_t_filtered <- x_t[, !zero_var_cols]
+    print(head(x_t_filtered));
+    pca <- prcomp(na.omit(x_t_filtered)), center=T, scale=T);
     imp.pca<-summary(pca)$importance;
     xlabel <- paste0("PC1"," (", 100*round(imp.pca[2,][1], 3), "%)")
     ylabel <- paste0("PC2"," (", 100*round(imp.pca[2,][2], 3), "%)")
