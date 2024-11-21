@@ -319,7 +319,7 @@ CovariateScatter.Anal <- function(dataName,
 
   comp_res_path <- paste0(names(dataSets)[i], "_data/", "comp_res.csv");
   fast.write.csv(rest, file=paste0(dataName, "_data/", "comp_res.csv"))
-  RegisterData(dataSet$comp.res)
+  RegisterData(dataSet)
   return(c(sig.num, nonSig));
 }
 
@@ -340,7 +340,6 @@ invert_named_vector <- function(input_named_vec) {
 PlotCovariateMap <- function(dataName, theme="default", imgName="NA", format="png", dpi=72){
   dataSet <- readDataset(dataName);
   both.mat <- dataSet$cov.mat
-  print(head(both.mat))
   both.mat <- both.mat[order(-both.mat[,"pval.adj"]),]
   logp_val <- dataSet$cov$thresh
   load_ggplot();
