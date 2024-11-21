@@ -166,7 +166,6 @@ PlotMultiPCA <- function(imgNm, dpi=72, format="png",factor="1", interactive=F){
   pct <- list();
   all_data <- list()
 
-  print(paste("Plotting PCA for multi-omics data", sel.nms, "to", imgNm, sep = " "))
   for(i in 1:length(sel.nms)){
     dataSet = readDataset(sel.nms[i])
     x <- dataSet$data.proc
@@ -175,6 +174,7 @@ PlotMultiPCA <- function(imgNm, dpi=72, format="png",factor="1", interactive=F){
     zero_var_cols <- apply(x_t, 2, function(col) var(col) == 0)
     # Remove columns with zero variance
     x_t_filtered <- x_t[, !zero_var_cols]
+    print(head(x_t_filtered));
     pca <- prcomp(na.omit(x_t_filtered), center=T, scale=T);
     imp.pca<-summary(pca)$importance;
     xlabel <- paste0("PC1"," (", 100*round(imp.pca[2,][1], 3), "%)")
@@ -292,10 +292,8 @@ PlotMultiDensity <- function(imgNm, dpi=72, format="png",factor="1", interactive
   }
   
   type<-merged.df$type
-  print(paste0("Dataset: ", merged.df$Dataset))
   merged.df$ind <- paste0(merged.df$ind, "_", merged.df$type)
-  print(paste0("Dataset ind: ", merged.df$ind))
-  g =ggplot(merged.df, aes(x=values)) + 
+    g =ggplot(merged.df, aes(x=values)) + 
     geom_line(aes(color=Dataset, group=ind), stat="density", alpha=0.1) + 
     geom_line(aes(color=Dataset), stat="density", alpha=0.7, size=3) +
     theme_bw() +
