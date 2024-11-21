@@ -238,7 +238,7 @@ PlotMultiPCA <- function(imgNm, dpi=72, format="png",factor="1", interactive=F){
   
   p1 <- ggplot(combined_data, aes(x=PC1, y=PC2, color=Conditions)) +
     geom_point(size=3, alpha=0.5) +
-    geom_text(aes(label=names),size=1) +  # Add labels
+    #geom_text(aes(label=names),size=1) +  # Add labels
     facet_wrap(~ dataset, scales = "free") + # Use facet_wrap or facet_grid
     theme_bw() +
     theme(text=element_text(size=13))
@@ -294,7 +294,8 @@ PlotMultiDensity <- function(imgNm, dpi=72, format="png",factor="1", interactive
   
   type<-merged.df$type
   merged.df$ind <- paste0(merged.df$ind, "_", merged.df$type)
-  merged.df$Dataset <- as.factor(merged.df$Dataset)
+  merged.df$ind <- as.factor(merged.df$ind, levels = unique(merged.df$ind))
+  merged.df$Dataset <- as.factor(merged.df$Dataset, levels = unique(merged.df$Dataset))
   g <- ggplot(merged.df, aes(x=values)) + 
       geom_line(aes(color=Dataset, group=ind), stat="density", alpha=0.1) + 
       geom_line(aes(color=Dataset, group=Dataset), stat="density", alpha=0.7, size=3) +
