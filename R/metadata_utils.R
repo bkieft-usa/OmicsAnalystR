@@ -611,11 +611,16 @@ PlotMetaCorrHeatmap <- function(cor.opt="pearson", imgName="", dpi=96, imgFormat
   library(scales);
   
   metaData[metaData == "NA"] <- NA;
-  for(i in c(1:length(disc.inx))){
-    metaData[,disc.inx[i]] <- as.integer(metaData[,disc.inx[i]], na.rm = TRUE);
+  if (!is.null(disc.inx) && length(disc.inx) > 0) {
+    for(i in 1:length(disc.inx)){
+      metaData[,disc.inx[i]] <- as.integer(metaData[,disc.inx[i]], na.rm = TRUE);
+    }
   }
-  for(i in c(1:length(cont.inx))){
-    metaData[,cont.inx[i]] <- as.numeric(as.character(metaData[,cont.inx[i]], na.rm = TRUE));
+
+  if (!is.null(cont.inx) && length(cont.inx) > 0) {
+    for(i in 1:length(cont.inx)){
+      metaData[,cont.inx[i]] <- as.numeric(as.character(metaData[,cont.inx[i]], na.rm = TRUE));
+    }
   }
   
 
