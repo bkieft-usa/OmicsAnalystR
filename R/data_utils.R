@@ -78,15 +78,15 @@ Init.Data <- function(){
     sqlite.path <<- "/Users/jessicaewald/sqlite/sqlite/"; #jess local
   }
 
-  paramSet <- list(objName="paramSet", jsonNms=list());
-  cmdSet <- list(objName="cmdSet");
-  msgSet <- list(objName="msgSet");
-  infoSet <- list();
+  paramSet <<- list(objName="paramSet", jsonNms=list());
+  cmdSet <<- list(objName="cmdSet");
+  msgSet <<- list(objName="msgSet");
+  infoSet <<- list();
   infoSet$objName <- "infoSet";
   infoSet$paramSet <- paramSet;
   infoSet$cmdSet <- cmdSet;
   infoSet$msgSet <- msgSet;
-  globalConfig <- list();
+  globalConfig <<- list();
   globalConfig$anal.mode <- "default";
   globalConfig <<- globalConfig;
   saveSet(infoSet, "infoSet");
