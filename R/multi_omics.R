@@ -174,7 +174,6 @@ PlotMultiPCA <- function(imgNm, dpi=72, format="png",factor="1", interactive=F){
     zero_var_cols <- apply(x_t, 2, function(col) var(col) == 0)
     # Remove columns with zero variance
     x_t_filtered <- x_t[, !zero_var_cols]
-    print(head(x_t_filtered));
     pca <- prcomp(na.omit(x_t_filtered), center=T, scale=T);
     imp.pca<-summary(pca)$importance;
     xlabel <- paste0("PC1"," (", 100*round(imp.pca[2,][1], 3), "%)")
@@ -186,7 +185,8 @@ PlotMultiPCA <- function(imgNm, dpi=72, format="png",factor="1", interactive=F){
     xlim <- GetExtendRange(pca.res$PC1);
     ylim <- GetExtendRange(pca.res$PC2);
     
-    Factor <- dataSet$meta[,1];
+    factor <- as.numeric(factor)
+    Factor <- dataSet$meta[,factor];
     pca.rest <- pca.res
     pca.rest$Conditions <- Factor
     pca.rest$names <- rownames(pca.res)
