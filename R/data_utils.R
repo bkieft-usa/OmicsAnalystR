@@ -78,7 +78,7 @@ Init.Data <- function(){
     sqlite.path <<- "/Users/jessicaewald/sqlite/sqlite/"; #jess local
   }
 
-  paramSet <<- list(objName="paramSet", jsonNms=list());
+  paramSet <<- list(objName="paramSet", jsonNms=list(), api.bool=FALSE);
   cmdSet <<- list(objName="cmdSet");
   msgSet <<- list(objName="msgSet");
   infoSet <<- list();
