@@ -214,7 +214,7 @@ SanityCheckData <- function(dataName){
 # note, dataSet need to have "name" property
 RegisterData <- function(dataSet, output=1){
   dataName <- dataSet$name;
-
+  print(dataName);
   mdata.all[[dataName]] <<- 1;
 
   if(.on.public.web){
