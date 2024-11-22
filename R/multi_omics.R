@@ -295,7 +295,6 @@ PlotMultiDensity <- function(imgNm, dpi=72, format="png",factor="1", interactive
 
   merged.df$Dataset <- factor(merged.df$Dataset, levels = unique(merged.df$Dataset))
   g <- ggplot(merged.df, aes(x=values)) + 
-      geom_line(color = "gray", stat="identity", alpha=0.1) + 
       geom_line(aes(color=Dataset, group = Dataset), stat="density", alpha=0.7, size=3) +
       theme_bw() +
       theme(text=element_text(size=13))
